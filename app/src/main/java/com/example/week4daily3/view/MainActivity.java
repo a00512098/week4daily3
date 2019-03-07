@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import com.example.week4daily3.R;
 import com.example.week4daily3.RetrofitHelper;
 import com.example.week4daily3.adapters.SectionsPagerAdapter;
 import com.example.week4daily3.model.GitHubApi;
+import com.example.week4daily3.model.apiobjects.Repositories;
 import com.example.week4daily3.model.apiobjects.User;
 
 import java.util.ArrayList;
@@ -38,6 +40,8 @@ public class MainActivity extends AppCompatActivity
     private ViewPager mViewPager;
     private BottomNavigationView navigation;
 
+    private final String USERNAME = "a00512098";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +50,9 @@ public class MainActivity extends AppCompatActivity
         initViews();
 
         gitHubService = RetrofitHelper.getHelper().create(GitHubApi.class);
-        Call<User> callUser = gitHubService.getUserInfo("a00512098");
+
+        // Call for user
+        Call<User> callUser = gitHubService.getUserInfo(USERNAME);
         callUser.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -57,6 +63,21 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 Log.e("Log.d", "CallbackError: " + t.toString());
+            }
+        });
+
+        // Call for repos
+        Call<ArrayList<Repositories>> callRepos = gitHubService.getUserRepos(USERNAME);
+        callRepos.enqueue(new Callback<ArrayList<Repositories>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Repositories>> call, Response<ArrayList<Repositories>> response) {
+                ArrayList list = response.body();
+                fragment2.setReposArayList(list);
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Repositories>> call, Throwable t) {
+
             }
         });
     }

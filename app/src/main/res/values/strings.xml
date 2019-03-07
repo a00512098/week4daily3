@@ -10,4 +10,6 @@
     <string name="user_url_s">User URL: %s</string>
     <string name="location_s">Location: %s</string>
     <string name="bio_s">Bio: %s</string>
+    <string name="accessibility_b">Accessibility: %b</string>
+    <string name="repo_id_d">Repo ID: %d</string>
 </resources>

@@ -1,16 +1,26 @@
 package com.example.week4daily3.view;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.week4daily3.R;
+import com.example.week4daily3.adapters.RecyclerAdapter;
+import com.example.week4daily3.model.apiobjects.Repositories;
+
+import java.util.ArrayList;
 
 public class RepositoriesFragment extends Fragment {
+    private ArrayList<Repositories> repos;
+    private RecyclerView recyclerView;
+    private RecyclerAdapter recyclerAdapter;
 
     public RepositoriesFragment() {
         // Required empty public constructor
@@ -35,6 +45,17 @@ public class RepositoriesFragment extends Fragment {
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        repos = new ArrayList<>();
+        recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerAdapter = new RecyclerAdapter(repos);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(recyclerAdapter);
+    }
+
+    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
     }
@@ -42,5 +63,10 @@ public class RepositoriesFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+    }
+
+    public void setReposArayList(ArrayList<Repositories> repos) {
+        this.repos = repos;
+        recyclerAdapter.updateList(repos);
     }
 }
