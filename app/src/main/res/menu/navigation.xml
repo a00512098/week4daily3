@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/userProfile"
+        android:icon="@drawable/ic_account_box_black_24dp"
+        android:title="@string/profile" />
+
+    <item
+        android:id="@+id/userRepositories"
+        android:icon="@drawable/ic_view_list_black_24dp"
+        android:title="@string/repositories" />
+
+</menu>

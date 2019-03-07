@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Week 4 Daily 3</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="profile">Profile</string>
+    <string name="repositories">Repositories</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="user_url_s">User URL: %s</string>
+    <string name="location_s">Location: %s</string>
+    <string name="bio_s">Bio: %s</string>
+</resources>
